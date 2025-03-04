@@ -25,15 +25,16 @@ public class Main {
             }
 
             char sym = ' ';
+            Operator operator = null;
             // 기호 입력
             while (true) {
                 System.out.print("기호를 입력하세요(+, -, *, /): ");
                 sym = sc.next().charAt(0);
-                if (sym == '+' || sym == '-' || sym == '*' || sym == '/') {
-                    System.out.println("입력된 기호: " + sym);
-                    break; // 올바른 기호가 입력되면 반복문 종료
-                } else {
-                    System.out.println("잘못된 기호 입니다. 다시 입력해주세요.");
+                try {
+                    operator = Operator.fromSymbol(sym);
+                    break;
+                } catch (IllegalArgumentException e) {
+                    System.out.println(e.getMessage());
                 }
             }
 
@@ -51,27 +52,8 @@ public class Main {
                 }
             }
 
-            int res = 0;
-            // 기호에 맞는 계산 실행
-            switch (sym) {
-                case '+':
-                    res = cal.add(num1, num2);
-                    break;
-                case '-':
-                    res = cal.subtract(num1, num2);
-                    break;
-                case '*':
-                    res = cal.multiply(num1, num2);
-                    break;
-                case '/':
-                    res = cal.divide(num1, num2);
-                    break;
-                default:
-                    System.out.println("잘못된 기호입니다.");
-                    continue; // 잘못된 기호이면 올바른 기호를 입력받기 위해 반복문을 다시 실행.
-            }
-
-            System.out.println("결과: " + res); // 계산 결과 출력
+            int res = cal.calculate(operator, num1, num2);
+            System.out.println("결과: " + res);
 
             sc.nextLine(); // 개행 문자 처리(nextInt를 사용하고 나면 /n(개행문자가 남음)
 
