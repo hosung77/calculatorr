@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class Calculator {
 
@@ -36,4 +37,14 @@ public class Calculator {
     public void setResults(List<Number> results) {
         this.results = results;
     }
+
+    public void printResultsGraterThan(Number x){
+        List<Number> filteredResults= results.stream()
+                .filter(result -> result.doubleValue() > x.doubleValue()) // 둘다 더블형으로 형변환 후 대소 비교
+                .collect(Collectors.toList());
+
+        System.out.println(filteredResults);
+    }
+
+
 }
