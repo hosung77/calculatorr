@@ -51,7 +51,6 @@ public class Main {
                     sc.nextLine(); // 잘못된 입력 후 버퍼에 남은 잘못된 값을 제거하기 위해 nextLine() 호출
                 }
             }
-
             int res = cal.calculate(operator, num1, num2);
             System.out.println("결과: " + res);
 
