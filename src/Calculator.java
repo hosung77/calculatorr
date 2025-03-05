@@ -3,40 +3,37 @@ import java.util.List;
 
 public class Calculator {
 
-    // 속성
-    private List<Integer> results = new ArrayList<>(); // 내부에서만 값 수정가능
+    private List<Number> results = new ArrayList<>(); // 결과는 Number 타입으로 받기
 
-    // 생성자(따로 생성하지 않았으니 기본 생성자가 자동으로 살행됨)
-
-    // 기능
-    public int calculate(Operator operator, int a, int b) {
-        int result = operator.apply(a, b); // Enum 내부의 apply() 메서드 호출
+    public Number calculate(Operator operator, Number a, Number b) {
+        Number result = operator.apply(a, b); // Enum의 apply 메서드 호출
         results.add(result); // 결과 저장
         return result;
     }
 
     public void printResults() {
-        System.out.println(results);
+        System.out.println("결과들: " + results);
     }
 
     public void deleteResult(int index) {
         System.out.println("삭제 전: " + results);
-        results.remove(index-1); // index는 1부터 시작하므로
-        System.out.println("삭제 후: "+ results);
+        if (index > 0 && index <= results.size()) {
+            results.remove(index - 1); // index는 1부터 시작
+            System.out.println("삭제 후: " + results);
+        } else {
+            System.out.println("잘못된 인덱스입니다.");
+        }
     }
 
     public int printResultSize() {
         return results.size();
     }
 
-    // Getter
-    public List<Integer> getResults() {
+    public List<Number> getResults() {
         return results;
     }
 
-    // Setter
-    public void setResults(List<Integer> results) {
+    public void setResults(List<Number> results) {
         this.results = results;
     }
-
 }

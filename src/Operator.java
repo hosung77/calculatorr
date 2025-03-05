@@ -1,49 +1,72 @@
 public enum Operator {
-
     ADD('+') {
         @Override
-        public int apply(int a, int b) {
-            return a + b;
+        public Number apply(Number a, Number b) {
+            double result = a.doubleValue() + b.doubleValue();
+
+            if(a instanceof Integer && b instanceof Integer) {
+                return (int) result;
+            } else {
+                return result;
+            }
         }
     },
     SUBTRACT('-') {
         @Override
-        public int apply(int a, int b) {
-            return a - b;
+        public Number apply(Number a, Number b) {
+            double result = a.doubleValue() - b.doubleValue();
+
+            if(a instanceof Integer && b instanceof Integer) {
+                return (int) result;
+            } else {
+                return result;
+            }
         }
     },
     MULTIPLY('*') {
         @Override
-        public int apply(int a, int b) {
-            return a * b;
+        public Number apply(Number a, Number b) {
+            double result = a.doubleValue() * b.doubleValue();
+
+            if(a instanceof Integer && b instanceof Integer) {
+                return (int) result;
+            } else {
+                return result;
+            }
         }
     },
     DIVIDE('/') {
         @Override
-        public int apply(int a, int b) {
-            if (b == 0) {
+        public Number apply(Number a, Number b) {
+            if (b.doubleValue() == 0.0) {
                 throw new ArithmeticException("0으로 나눌 수 없습니다.");
             }
-            return a / b;
+
+            double result = a.doubleValue() / b.doubleValue();
+
+            if(a instanceof Integer && b instanceof Integer) {
+                return (int) result;
+            } else {
+                return result;
+            }
         }
     };
 
-    private final char symbol; // ✅ char 유지
+    private final char symbol;
 
-    Operator(char symbol) { // ✅ char 타입 생성자 유지
+    Operator(char symbol) {
         this.symbol = symbol;
     }
 
-    // 추상 메서드
-    public abstract int apply(int a, int b);
+    public abstract Number apply(Number a, Number b);
 
     public char getSymbol() {
         return symbol;
     }
 
-    public static Operator fromSymbol(char symbol) { // ✅ char 타입 유지
+    public static Operator fromSymbol(char symbol) {
         for (Operator op : values()) {
-            if (op.symbol == symbol) { // ✅ char 비교는 == 사용
+            if (op.symbol == symbol) {
                 return op;
             }
         }

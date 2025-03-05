@@ -6,21 +6,22 @@ public class Main {
         Calculator cal = new Calculator();
 
         while (true) { // break로 빠져 나오기 전까지 반복되서 실행됨.
-            int num1 = 0;
-            int num2 = 0;
+            Number num1 = null;
+            Number num2 = null;
             int deleteNum = 0;
 
             // 첫 번째 숫자 입력
-            while (num1 <= 0) {
+            while (num1 == null) {
                 System.out.print("숫자를 입력해주세요: ");
+                String input = sc.nextLine(); // 숫자 입력 받기
                 try {
-                    num1 = sc.nextInt(); // 숫자 입력 받기
-                    if (num1 <= 0) {
-                        System.out.print("0보다 큰 숫자를 입력해주세요.");
+                    if (input.contains(".")) {
+                        num1 = Double.parseDouble(input); // 실수 입력
+                    } else {
+                        num1 = Integer.parseInt(input); // 정수 입력
                     }
-                } catch (Exception e) { // 숫자가 아닌 입력이 들어오면 예외 처리
+                } catch (Exception e) { // 잘못된 입력 처리
                     System.out.println("잘못된 입력입니다. 숫자만 입력해주세요.");
-                    sc.nextLine(); // 잘못된 입력 후 버퍼에 남은 잘못된 값을 제거하기 위해 nextLine() 호출
                 }
             }
 
@@ -29,7 +30,7 @@ public class Main {
             // 기호 입력
             while (true) {
                 System.out.print("기호를 입력하세요(+, -, *, /): ");
-                sym = sc.next().charAt(0);
+                sym = sc.nextLine().charAt(0); // nextLine()을 사용하여 기호 입력 받기
                 try {
                     operator = Operator.fromSymbol(sym);
                     break;
@@ -39,22 +40,22 @@ public class Main {
             }
 
             // 두 번째 숫자 입력
-            while (num2 <= 0) {
+            while (num2 == null) {
                 System.out.print("숫자를 입력해주세요: ");
+                String input = sc.nextLine(); // 숫자 입력 받기
                 try {
-                    num2 = sc.nextInt(); // 숫자 입력 받기
-                    if (num2 <= 0) {
-                        System.out.print("0보다 큰 숫자를 입력해주세요.");
+                    if (input.contains(".")) {
+                        num2 = Double.parseDouble(input); // 실수 입력
+                    } else {
+                        num2 = Integer.parseInt(input); // 정수 입력
                     }
-                } catch (Exception e) { // 숫자가 아닌 입력이 들어오면 예외 처리
+                } catch (Exception e) { // 잘못된 입력 처리
                     System.out.println("잘못된 입력입니다. 숫자만 입력해주세요.");
-                    sc.nextLine(); // 잘못된 입력 후 버퍼에 남은 잘못된 값을 제거하기 위해 nextLine() 호출
                 }
             }
-            int res = cal.calculate(operator, num1, num2);
-            System.out.println("결과: " + res);
 
-            sc.nextLine(); // 개행 문자 처리(nextInt를 사용하고 나면 /n(개행문자가 남음)
+            Number res = cal.calculate(operator, num1, num2);
+            System.out.println("결과: " + res);
 
             // 메뉴 출력
             while (true) {
@@ -77,7 +78,7 @@ public class Main {
                         System.out.print("삭제할 기록 번호를 입력하세요(0을 입력하면 취소): ");
                         try {
                             deleteNum = sc.nextInt();
-                            sc.nextLine(); // 버퍼 비우기
+                            sc.nextLine(); // 버퍼 비우기 (nextInt() 후에 개행문자 처리)
                             if (deleteNum == 0) {
                                 System.out.println("삭제를 취소합니다.");
                             } else if (deleteNum > 0 && deleteNum <= resSize) {
