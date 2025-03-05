@@ -6,7 +6,7 @@ public class Main {
         Calculator cal = new Calculator();
 
         while (true) { // break로 빠져 나오기 전까지 반복되서 실행됨.
-            Number num1 = null;
+            Number num1 = null; // Number는 객체 이므로 0과 비교가 안되므로 초기값을 null로 넣어주고 while문 조건 실행
             Number num2 = null;
             int deleteNum = 0; // 삭제할 인덱스 번호
             int overNum = 0; // 결과의 기준이 되는 숫자
@@ -27,7 +27,7 @@ public class Main {
             }
 
             char sym = ' ';
-            Operator operator = null;
+            Operator operator = null; // enum 타입은 0 같 숫자로 초기화 불가
             // 기호 입력
             while (true) {
                 System.out.print("기호를 입력하세요(+, -, *, /): ");
@@ -61,11 +61,11 @@ public class Main {
             // 메뉴 출력
             while (true) {
                 System.out.println("계산기 작업을 선택하세요:");
-                System.out.println("1. 계산기 결과들 보기");
-                System.out.println("2. 계산기 기록 삭제하기");
-                System.out.println("3. 계산기 종료하기");
-                System.out.println("4. 계산기 계속하기");
-                System.out.println("5. 계산기 결과를 자기가 입력한 수보다 큰 결과들 보기");
+                System.out.println("1. 계산 결과들 보기");
+                System.out.println("2. 계산 기록 삭제하기");
+                System.out.println("3. 계산 종료하기");
+                System.out.println("4. 계산 계속하기");
+                System.out.println("5. 입력한 수보다 큰 계산 결과 보기");
                 System.out.print("원하는 작업의 번호를 입력해주세요: ");
                 String choice = sc.nextLine(); // 사용자 입력 받기
 

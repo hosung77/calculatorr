@@ -19,7 +19,7 @@ public class Calculator {
     public void deleteResult(int index) {
         System.out.println("삭제 전: " + results);
         if (index > 0 && index <= results.size()) {
-            results.remove(index - 1); // index는 1부터 시작
+            results.remove(index - 1); // index는 0부터 시작
             System.out.println("삭제 후: " + results);
         } else {
             System.out.println("잘못된 인덱스입니다.");
