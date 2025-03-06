@@ -6,8 +6,8 @@ public class Calculator {
 
     private List<Number> results = new ArrayList<>(); // 결과는 Number 타입으로 받기
 
-    public Number calculate(Operator operator, Number a, Number b) {
-        Number result = operator.apply(a, b); // Enum의 apply 메서드 호출
+    public <T extends Number> T calculate(Operator operator, T a, T b) {
+        T result = operator.apply(a, b); // Enum의 apply 메서드 호출
         results.add(result); // 결과 저장
         return result;
     }
@@ -19,7 +19,7 @@ public class Calculator {
     public void deleteResult(int index) {
         System.out.println("삭제 전: " + results);
         if (index > 0 && index <= results.size()) {
-            results.remove(index - 1); // index는 1부터 시작
+            results.remove(index - 1); // index는 0부터 시작
             System.out.println("삭제 후: " + results);
         } else {
             System.out.println("잘못된 인덱스입니다.");
@@ -39,12 +39,10 @@ public class Calculator {
     }
 
     public void printResultsGraterThan(Number x){
-        List<Number> filteredResults= results.stream()
-                .filter(result -> result.doubleValue() > x.doubleValue()) // 둘다 더블형으로 형변환 후 대소 비교
+        List<Number> filteredResults = results.stream()
+                .filter(result -> result.doubleValue() > x.doubleValue()) // 둘 다 더블형으로 형변환 후 대소 비교
                 .collect(Collectors.toList());
 
         System.out.println(filteredResults);
     }
-
-
 }

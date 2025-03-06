@@ -1,53 +1,48 @@
 public enum Operator {
     ADD('+') {
         @Override
-        public Number apply(Number a, Number b) {
+        public <T extends Number> T apply(T a, T b) {
             double result = a.doubleValue() + b.doubleValue();
-
-            if(a instanceof Integer && b instanceof Integer) {
-                return (int) result;
+            if (a instanceof Integer && b instanceof Integer) {
+                return (T) Integer.valueOf((int) result);
             } else {
-                return result;
+                return (T) Double.valueOf(result);
             }
         }
     },
     SUBTRACT('-') {
         @Override
-        public Number apply(Number a, Number b) {
+        public <T extends Number> T apply(T a, T b) {
             double result = a.doubleValue() - b.doubleValue();
-
-            if(a instanceof Integer && b instanceof Integer) {
-                return (int) result;
+            if (a instanceof Integer && b instanceof Integer) {
+                return (T) Integer.valueOf((int) result);
             } else {
-                return result;
+                return (T) Double.valueOf(result);
             }
         }
     },
     MULTIPLY('*') {
         @Override
-        public Number apply(Number a, Number b) {
+        public <T extends Number> T apply(T a, T b) {
             double result = a.doubleValue() * b.doubleValue();
-
-            if(a instanceof Integer && b instanceof Integer) {
-                return (int) result;
+            if (a instanceof Integer && b instanceof Integer) {
+                return (T) Integer.valueOf((int) result);
             } else {
-                return result;
+                return (T) Double.valueOf(result);
             }
         }
     },
     DIVIDE('/') {
         @Override
-        public Number apply(Number a, Number b) {
+        public <T extends Number> T apply(T a, T b) {
             if (b.doubleValue() == 0.0) {
                 throw new ArithmeticException("0으로 나눌 수 없습니다.");
             }
-
             double result = a.doubleValue() / b.doubleValue();
-
-            if(a instanceof Integer && b instanceof Integer) {
-                return (int) result;
+            if (a instanceof Integer && b instanceof Integer) {
+                return (T) Integer.valueOf((int) result);
             } else {
-                return result;
+                return (T) Double.valueOf(result);
             }
         }
     };
@@ -58,7 +53,7 @@ public enum Operator {
         this.symbol = symbol;
     }
 
-    public abstract Number apply(Number a, Number b);
+    public abstract <T extends Number> T apply(T a, T b);
 
     public char getSymbol() {
         return symbol;
