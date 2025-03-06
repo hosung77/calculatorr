@@ -76,16 +76,22 @@ public class Main {
                     case "2":
                         while(true) {
                             int resSize = cal.printResultSize();
+                            if (resSize == 0) {
+                                System.out.println("삭제할 기록이 없습니다.");
+                                break; // 결과가 없으면 반복문을 종료
+                            }
+
                             System.out.print("삭제할 기록 번호를 입력하세요(0을 입력하면 취소): ");
                             try {
                                 deleteNum = sc.nextInt();
                                 sc.nextLine(); // 버퍼 비우기
                                 if (deleteNum == 0) {
                                     System.out.println("삭제를 취소합니다.");
+                                    break; // 삭제 취소 시 반복문 종료
                                 } else if (deleteNum > 0 && deleteNum <= resSize) {
                                     cal.deleteResult(deleteNum);
                                     System.out.println("삭제가 완료되었습니다.");
-                                    break;
+                                    break; // 삭제 후 반복문 종료
                                 } else {
                                     System.out.println("범위에 맞지 않는 숫자입니다. 다시 입력해주세요.");
                                 }
